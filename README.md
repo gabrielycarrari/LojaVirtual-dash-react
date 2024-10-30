@@ -1,11 +1,4 @@
-# LojaVirtual-dash-react
-Área administrativa da Loja Virtual desenvolvida com React durante a disciplina de Desenvolvimento Web Avançado no Ifes Cachoeiro.
-
-### Dupla: Gabriely Carrari e Renan Poggian
-
-Obs.: O backend pode ser encontrado aqui: https://github.com/renan91300/LojaVirtualDWA2024
-
-## React + Vite
+# React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
