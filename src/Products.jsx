@@ -22,7 +22,11 @@ const Products = () => {
 
   const deleteProduct = (productId) => {
     setLoading(true);
-    api.post("excluir_produto", {"id_produto": productId}).then((response) => { if(response.status === 204) loadProducts()}).catch((error) => {console.error("Erro ao excluir produto:", error)}).finally(() => {setLoading(false)});
+    // api.post("excluir_produto", {"id_produto": productId}) 
+    api.post(`excluir_produto/${productId}`)
+      .then((response) => { if(response.status === 204) loadProducts()})
+      .catch((error) => {console.error("Erro ao excluir produto:", error)})
+      .finally(() => {setLoading(false)});
   }
 
   const handleDeleteProduct = (productId) => {
