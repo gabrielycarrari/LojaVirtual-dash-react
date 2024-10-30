@@ -3,6 +3,8 @@
 
 ### Dupla: Gabriely Carrari e Renan Poggian
 
+Obs.: O backend pode ser encontrado aqui: https://github.com/renan91300/LojaVirtualDWA2024
+
 ## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
