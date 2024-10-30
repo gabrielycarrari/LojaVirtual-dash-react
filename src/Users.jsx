@@ -21,8 +21,8 @@ const Users = () => {
 
   const deleteUser = (userId) => {
     setLoading(true);
-    // api.post("excluir_usuario", {"id_usuario": userId})
-    api.get(`excluir_usuario/${userId}`)
+    api.post("excluir_usuario", {"id_usuario": userId})
+    // api.get(`excluir_usuario/${userId}`)
       .then((response) => { if(response.status === 204) loadUsers()})
       .catch((error) => {console.error("Erro ao excluir usuário:", error)})
       .finally(() => {setLoading(false)});

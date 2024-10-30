@@ -1,23 +1,26 @@
+import CleaveInput from "./CleaveInput";
 import FormInput from "./FormInput";
+import FormTextArea from "./FormTextArea";
 
 const ProductForm = ({ handleChange, inputs, errors, isNew }) => {
     return (
         <>
             <div className="row">
                 <div className="col-12 mb-3">
-                    <FormInput type="text" field="nome" label="Nome" value={inputs.nome} error={errors?.name} onChange={handleChange} autofocus={true} />
+                    <FormInput type="text" field="nome" label="Nome" value={inputs?.nome} onChange={handleChange} error={errors?.name} autofocus={true} />
                 </div>
        
                 <div className="col-12 mb-3">
-                    <FormInput type="text" field="preco" label="Preco" value={inputs.preco} error={errors?.preco} onChange={handleChange} />
+                    
+                    <CleaveInput type="text" field="preco" label="Preço" value={inputs?.preco} onChange={handleChange} error={errors?.preco} options={{prefix: 'R$', numeral: true, numeralThousandsGroupStyle: 'thousand'}} />
                 </div>
             
                 <div className="col-12 mb-3">
-                    <FormInput type="text" field="descricao" label="Descricao" value={inputs.descricao} error={errors?.descricao} onChange={handleChange} />
+                    <FormTextArea field="descricao" label="Descrição" value={inputs?.descricao} onChange={handleChange} error={errors?.descricao} />
                 </div>
            
                 <div className="col-12 mb-3">
-                    <FormInput type="text" field="estoque" label="Estoque" value={inputs.estoque} error={errors?.estoque} onChange={handleChange} />
+                    <CleaveInput type="text" field="estoque" label="Estoque" value={inputs?.estoque} onChange={handleChange} error={errors?.estoque} options={{numeral: true, numeralPositiveOnly: true, numeralDecimalScale: 0}}/>
                 </div>
             </div>
         </>
