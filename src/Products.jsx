@@ -53,11 +53,12 @@ const Products = () => {
     return (
         <>
             {products.length > 0 ?
-            <>
-                <ModalConfirm modalId="modalDeleteProduct" question="Deseja realmente deletar o produto?" confirmAction={() => deleteProduct(selectedProductId)}/>
-                <TableProducts items={products} handleDeleteProduct={handleDeleteProduct}/> 
-            </> :
-                (!loading && <NoProducts />)}
+                <>
+                    <ModalConfirm modalId="modalDeleteProduct" question="Deseja realmente excluir o produto?" confirmAction={() => deleteProduct(selectedProductId)} />
+                    <TableProducts items={products} handleDeleteProduct={handleDeleteProduct}/> 
+                </> :
+                (!loading && <NoProducts />)
+            }
             {loading && <Loading />}
         </>
     );

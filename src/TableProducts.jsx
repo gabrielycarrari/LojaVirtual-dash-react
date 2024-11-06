@@ -13,7 +13,7 @@ const TableProducts = ({ items, handleDeleteProduct }) => {
                 </tr>
             </thead>
             <tbody>
-                {items.map(p => <TableProductsLine item={p} key={p.id} handleDeleteProduct={handleDeleteProduct}/>)}
+                {items.map(p => <TableProductsLine item={p} key={p.id} handleDeleteProduct={handleDeleteProduct} />)}
             </tbody>
         </table>
     )

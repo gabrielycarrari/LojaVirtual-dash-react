@@ -1,32 +1,32 @@
-import { useNavigate, useParams } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom';
 import ProductForm from './ProductForm';
-import { useState } from 'react';
-import FormButtons from './FormButtons';
+import { useEffect, useState } from 'react';
 import api from "./axiosApi";
-import { useEffect } from 'react';
+import FormButtons from './FormButtons';
 import handleChange from './handleChange';
+import parseErrors from './parseErrors';
 import Loading from './Loading';
- 
-const EditProduct = () => { 
-    const [inputs, setInputs] = useState({}); 
-    const [errors, setErrors] = useState({}); 
-    const [modal, setModal] = useState(undefined); 
+
+const EditProduct = () => {
+    const [inputs, setInputs] = useState({});
+    const [errors, setErrors] = useState({});
+    const [modal, setModal] = useState(undefined);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); 
- 
-    const idProduto = useParams().id; 
-    if (!idProduto) { 
-        navigate("/products"); 
-    } 
+    const navigate = useNavigate();
+
+    const idProduto = useParams().id;
+    if (!idProduto) {
+        navigate("/products");
+    }
 
     function loadProductById(id) {
         setLoading(true);
-        api.get(`/obter_produto/${id}`)
+        api.get(`obter_produto/${id}`)
             .then(response => {
                 setInputs(response.data);
             })
             .catch(error => {
-                console.error('Erro ao carregar produto: ', error);
+                console.error('Erro ao carregar produto:', error);
             })
             .finally(() => {
                 setLoading(false);
@@ -35,8 +35,9 @@ const EditProduct = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
+        setLoading(true);
         api.post("/alterar_produto", inputs)
-            .then((response) => {
+            .then((response) => {                
                 if (response.status === 204) {
                     navigate("/products");
                 } else {
@@ -44,31 +45,35 @@ const EditProduct = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                if (error && error.response && error.response.data)
+                    setErrors(parseErrors(error.response.data));
             })
+            .finally(() => {
+                setLoading(false);
+            });
     }
 
-    function localhandleChange(event) {
-        handleChange(event, inputs, setInputs)
+    function localHandleChange(event) {
+        handleChange(event, inputs, setInputs);
     }
 
     useEffect(() => {
-        setInputs({...inputs, id: idProduto});
+        setInputs({ ...inputs, id: idProduto });
         loadProductById(idProduto);
     }, [idProduto]);
-    
-    return ( 
+
+    return (
         <>
             <div className="d-flex justify-content-between align-items-center">
                 <h1>Alteração de Produto</h1>
             </div>
             <form onSubmit={handleSubmit} noValidate autoComplete='off'>
-                <ProductForm handleChange={localhandleChange} inputs={inputs} errors={errors} isNew={false} />
+                <ProductForm handleChange={localHandleChange} inputs={inputs} errors={errors} isNew={false} />
                 <FormButtons cancelTarget="/products" />
             </form>
             {loading && <Loading />}
         </>
-    ); 
-} 
- 
+    );
+}
+
 export default EditProduct;

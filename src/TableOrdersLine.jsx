@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { NumberFormatter, DateTimeFormatter, CurrencyFormatter, StringFormatter } from './formatters';
 
 const TableOrdersLine = ({ item, handleCancelOrder, handleEvolveOrder }) => {
